@@ -29,28 +29,18 @@ async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         response = client.models.generate_content(
         model="gemini-3.8-flash",
-        contents=f"""
-Ты дружелюбный русскоязычный помощник.
-Всегда отвечай пользователю на русском языке, если он не попросил другой язык.
-Отвечай понятно и по делу.
-
-Сообщение пользователя:
-{text}
-"""
+        contents=text,
     )
-
     answer = response.text or "Не смог сформировать ответ."
 
     for i in range(0, len(answer), 4000):
         await update.message.reply_text(answer[i:i+4000])
 
-except Exception as e:
+except Exception:
     logging.exception("AI request failed")
-
     await update.message.reply_text(
-        "Похоже, ИИ сейчас временно занят 😅 "
-        "Попробуй отправить сообщение ещё раз через несколько секунд."
-        )
+        "Сейчас не получилось получить ответ от ИИ. Попробуй ещё раз."
+    )
 
 telegram_app.add_handler(CommandHandler("start", start))
 telegram_app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, chat))
