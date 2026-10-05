@@ -28,8 +28,14 @@ async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     try:
         response = client.models.generate_content(
-            model="gemini-3.8-flash",
-            contents=text,
+    model="gemini-3.8-flash",
+    contents=f"""Ты русскоязычный помощник писателя.
+Всегда отвечай пользователю на русском языке.
+Помогай писать книгу: с главами, идеями, сюжетом, персонажами и текстом.
+Отвечай понятно, дружелюбно и по делу.
+
+Сообщение пользователя:
+{text}""",
         )
         answer = response.text or "Не смог сформировать ответ."
         # Telegram has a message length limit.
