@@ -27,9 +27,9 @@ async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     try:
-        response = client.models.generate_content(
-        model="gemini-3.8-flash",
-        contents=text,
+         response = client.models.generate_content(
+             model="gemini-3.8-flash",
+             contents=text,
     )
     answer = response.text or "Не смог сформировать ответ."
 
