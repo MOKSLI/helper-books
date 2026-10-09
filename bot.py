@@ -31,9 +31,9 @@ async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
              model="gemini-3.8-flash",
              contents=text,
     )
-         answer = response.text or "Не смог сформировать ответ."
+             answer = response.text or "Не смог сформировать ответ."
 
-         for i in range(0, len(answer), 4000):
+             for i in range(0, len(answer), 4000):
          await update.message.reply_text(answer[i:i+4000])
 
 except Exception:
