@@ -34,9 +34,9 @@ async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
              answer = response.text or "Не смог сформировать ответ."
 
              for i in range(0, len(answer), 4000):
-         await update.message.reply_text(answer[i:i+4000])
+             await update.message.reply_text(answer[i:i+4000])
 
-except Exception:
+    except Exception:
     logging.exception("AI request failed")
     await update.message.reply_text(
         "Сейчас не получилось получить ответ от ИИ. Попробуй ещё раз."
